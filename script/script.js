@@ -1,39 +1,41 @@
 window.addEventListener('DOMContentLoaded', function () {
 	'use strict';
 
-	//модальное окно 1
-	const tooglePopUp = () => {
+	//создаём функцию для открытия и закрытия модальных окон
+	const tooglePopUp = (popUpClass, btnClass) => {
 		//получаем необходимые элементы
-		const callBtn = document.querySelectorAll('a[class="call-btn"]'),
-			popUpCall = document.querySelector('.popup-call');
+		const btn = document.querySelectorAll(btnClass),
+			popUp = document.querySelector(popUpClass);
 
 
 		// Вешаем обработчик события. Открываем модальное окно при клике на "Перезвоните мне" в хедере и футере
-		callBtn.forEach((elem) => {
+		btn.forEach((elem) => {
 			elem.addEventListener('click', () => {
-				popUpCall.style.display = 'block';
+				popUp.style.display = 'block';
 			});
 		});
 
 		//Обработчик события для закрытия модального окна при клике на крестик или на подложку
-		popUpCall.addEventListener('click', (event) => {
+		popUp.addEventListener('click', (event) => {
 			let target = event.target;
-
+			//закрытие на крестик
 			if (target.classList.contains('popup-close')) {
-				popUpCall.style.display = 'none';
+				popUp.style.display = 'none';
 			} else {
+				//если кликнули не на модальное окно, то скрываем его
 				target = target.closest('.popup-content');
 
 				if (!target) {
-					popUpCall.style.display = 'none';
+					popUp.style.display = 'none';
 				}
 			}
 		});
 	};
 
-	tooglePopUp();
+	//Вызываем функцию открытия/закрытия модального окна при нажатии на "Перезвоните мне"
+	tooglePopUp('.popup-call', '.call-btn');
 
-
-
+	//Вызываем функцию открытия/закрытия модального окна при нажатии на "Заказать со скидкой" и "Узнать цену со скидкой"
+	tooglePopUp('.popup-discount', '.discount-btn');
 
 });
