@@ -170,7 +170,10 @@ window.addEventListener('DOMContentLoaded', function () {
 			checkBox = document.querySelectorAll('.onoffswitch-checkbox'),
 			secondSection = document.getElementById('second-section'),
 			formControl = document.querySelectorAll('.form-control'),
+			inputText = accordion.querySelector('input[type="text"]'),
 			calcResult = document.getElementById('calc-result');
+
+			console.log('inputText: ', inputText);
 
 
 		const countSum = () => {
@@ -256,11 +259,24 @@ window.addEventListener('DOMContentLoaded', function () {
 				}
 			};
 
+			const dno = () => {
+				if (checkBox[1].hasAttribute('checked')) {
+					return 'с днищем';
+				} else {
+					return 'без днища';
+				}
+			};
+
 			const data = {
 				'Тип септика': type(),
-				'Диаметр первого колодца': ,
+				'Диаметр первого колодца': formControl[0].options[formControl[0].selectedIndex].textContent,
+				'Количество колец первого колодца': formControl[1].options[formControl[1].selectedIndex].textContent,
+				'Диаметр второго колодца': formControl[2].options[formControl[2].selectedIndex].textContent,
+				'Количество колец второго колодца': formControl[3].options[formControl[3].selectedIndex].textContent,
+				'Наличие днища колодца': dno(),
+				'Расстояние от септика до дома': inputText.value
 			};
-			
+			console.log(data);
 		});
 		tooglePopUp('.popup-discount', 'button.call-btn');
 	};
