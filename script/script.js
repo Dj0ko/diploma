@@ -17,6 +17,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 		//Обработчик события для закрытия модального окна при клике на крестик или на подложку
 		popUp.addEventListener('click', (event) => {
+			event.preventDefault();
 			let target = event.target;
 			//закрытие на крестик
 			if (target.classList.contains('popup-close')) {
@@ -34,7 +35,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	//Вызываем функцию открытия/закрытия модального окна при нажатии на "Перезвоните мне"
 	tooglePopUp('.popup-call', 'a[class="call-btn"]');
-	// tooglePopUp('.popup-call', '.call-btn');
 
 	//Вызываем функцию открытия/закрытия модального окна при нажатии на "Заказать со скидкой" и "Узнать цену со скидкой"
 	tooglePopUp('.popup-discount', '.discount-btn');
@@ -128,23 +128,11 @@ window.addEventListener('DOMContentLoaded', function () {
 			panelContent = accordion.querySelectorAll('.panel-collapse'),
 			btn = accordion.querySelectorAll('.construct-btn');
 
-		const asd = document.getElementById('headingTwo-two');
-		// console.log('asd: ', asd);
-
-		// let count = -100;
-		// const openTabs = (elem) => {
-		// 	count++;
-		// 	elem.style.top = count + 'px';
-		// 	setTimeout(openTabs, 10);
-		// };
 		// функция для показа/скрытие выбранных табов
 		const toogleTabContent = (index) => {
 			for (let i = 0; i < panelContent.length; i++) {
 				if (index === i) {
 					panelContent[i].classList.add('in');
-					// openTabs(panelContent[i]);
-					// panelContent[i].style.display = 'block';
-					// panelContent[i].style.top = 300 + 'px';
 				} else {
 					panelContent[i].classList.remove('in');
 				}
@@ -162,7 +150,7 @@ window.addEventListener('DOMContentLoaded', function () {
 					}
 				});
 				btn.forEach((item, i) => {
-					if (item === target.closest('.construct-btn')) {
+					if (item === target.closest('.construct-btn') && i !== 3) {
 						toogleTabContent(i + 1);
 					}
 				});
@@ -183,6 +171,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			secondSection = document.getElementById('second-section'),
 			formControl = document.querySelectorAll('.form-control'),
 			calcResult = document.getElementById('calc-result');
+
 
 		const countSum = () => {
 			let total = 10000;
@@ -255,13 +244,26 @@ window.addEventListener('DOMContentLoaded', function () {
 				} else {
 					secondSection.style.display = 'none';
 				}
+
 			});
 
 			countSum();
+			const type = () => {
+				if (checkBox[0].hasAttribute('checked')) {
+					return 'однокамерный';
+				} else {
+					return 'двухкамерный';
+				}
+			};
 
+			const data = {
+				'Тип септика': type(),
+				'Диаметр первого колодца': ,
+			};
+			
 		});
+		tooglePopUp('.popup-discount', 'button.call-btn');
 	};
-
 	calc();
 
 	// кнопка "Больше"
