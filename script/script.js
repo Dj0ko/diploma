@@ -127,8 +127,6 @@ window.addEventListener('DOMContentLoaded', function () {
 			panelHeading = accordion.querySelectorAll('.panel-heading'),
 			panelContent = accordion.querySelectorAll('.panel-collapse'),
 			btn = accordion.querySelectorAll('.construct-btn');
-			console.log('btn: ', btn);
-
 
 		//функция для показа/скрытие выбранных табов
 		const toogleTabContent = (index) => {
@@ -153,7 +151,7 @@ window.addEventListener('DOMContentLoaded', function () {
 				});
 				btn.forEach((item, i) => {
 					if (item === target.closest('.construct-btn')) {
-						toogleTabContent(i+1);
+						toogleTabContent(i + 1);
 					}
 				});
 			}
@@ -163,4 +161,119 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	tabs('accordion');
 	tabs('accordion-two');
+
+	//калькулятор
+	const calc = () => {
+		const checkBoxInput = document.getElementById('myonoffswitch'),
+			onoffswitchLabel = document.querySelector('.onoffswitch-label'),
+			secondSection = document.getElementById('second-section'),
+			accordion11 = document.getElementById('accordion'),
+			formControl = document.querySelectorAll('.form-control');
+
+		secondSection.style.display = 'none';
+		onoffswitchLabel.addEventListener('click', () => {
+			if (checkBoxInput.checked) {
+				checkBoxInput.removeAttribute('checked');
+				secondSection.style.display = 'block';
+			} else {
+				checkBoxInput.setAttribute('checked', true);
+				secondSection.style.display = 'none';
+			}
+		});
+
+		const countSum = () => {
+			let total = 0,
+				defaultValue;
+
+			const selectedValue0 = formControl[0].options[formControl[0].selectedIndex].value;
+			const selectedValue1 = formControl[1].options[formControl[1].selectedIndex].value;
+			const selectedValue2 = formControl[2].options[formControl[2].selectedIndex].value;
+			const selectedValue3 = formControl[3].options[formControl[3].selectedIndex].value;
+
+			if (checkBoxInput.checked) {
+				defaultValue = 10000;
+
+				if (selectedValue0 === '1.2') {
+					total = defaultValue * +selectedValue0;
+				} else {
+					total = defaultValue;
+				}
+
+				if (selectedValue1 === '1.3') {
+					total = total * +selectedValue1;
+				} else if (selectedValue1 === '1.5') {
+					total = total * +selectedValue1;
+				}
+
+			} else {
+				defaultValue = 15000;
+
+				if (selectedValue2 === '1.2') {
+					total = defaultValue * +selectedValue2;
+				} else {
+					total = defaultValue;
+				}
+
+				if (selectedValue3 === '1.3') {
+					total = total * +selectedValue3;
+				} else if (selectedValue3 === '1.5') {
+					total = total * +selectedValue3;
+				}
+			}
+
+			// console.log('selectedBox: ', selectedValue1);
+
+			// if (selectedValue0 === '1.2') {
+			// 	total = defaultValue * +selectedValue0;
+			// } else {
+			// 	total = defaultValue;
+			// }
+
+			// if (selectedValue1 === '1.3') {
+			// 	total = total * +selectedValue1;
+			// } else if (selectedValue1 === '1.5') {
+			// 	total = total * +selectedValue1;
+			// }
+
+			// if (selectedValue2 === '1.2') {
+			// 	total = total * +selectedValue2;
+			// }
+
+			// if (selectedValue3 === '1.3') {
+			// 	total = total * +selectedValue3;
+			// } else if (selectedValue1 === '1.5') {
+			// 	total = total * +selectedValue3;
+			// }
+
+			return total;
+		};
+
+		accordion11.addEventListener('change', () => {
+			console.log(countSum());
+			countSum();
+		});
+
+	};
+
+	calc();
+
+	// кнопка "Больше"
+	const openSentence = () => {
+		const sentenceBtn = document.querySelector('.add-sentence-btn'),
+			sentence = document.querySelector('.sentence'),
+			sentenceBlocks = sentence.querySelectorAll('.col-xs-12');
+			
+		sentenceBtn.addEventListener('click', () => {
+			sentenceBlocks.forEach((elem) => {
+				if (elem.classList.contains('visible-sm-block')) {
+					elem.classList.remove('visible-sm-block');
+				} else if (elem.classList.contains('hidden')) {
+					elem.classList.remove('hidden');
+				}
+			});
+			sentenceBtn.style.display = 'none';
+		});
+	};
+
+	openSentence();
 });
