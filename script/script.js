@@ -128,11 +128,23 @@ window.addEventListener('DOMContentLoaded', function () {
 			panelContent = accordion.querySelectorAll('.panel-collapse'),
 			btn = accordion.querySelectorAll('.construct-btn');
 
-		//функция для показа/скрытие выбранных табов
+		const asd = document.getElementById('headingTwo-two');
+		// console.log('asd: ', asd);
+
+		// let count = -100;
+		// const openTabs = (elem) => {
+		// 	count++;
+		// 	elem.style.top = count + 'px';
+		// 	setTimeout(openTabs, 10);
+		// };
+		// функция для показа/скрытие выбранных табов
 		const toogleTabContent = (index) => {
 			for (let i = 0; i < panelContent.length; i++) {
 				if (index === i) {
 					panelContent[i].classList.add('in');
+					// openTabs(panelContent[i]);
+					// panelContent[i].style.display = 'block';
+					// panelContent[i].style.top = 300 + 'px';
 				} else {
 					panelContent[i].classList.remove('in');
 				}
@@ -164,95 +176,90 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	//калькулятор
 	const calc = () => {
-		const checkBoxInput = document.getElementById('myonoffswitch'),
-			onoffswitchLabel = document.querySelector('.onoffswitch-label'),
+		//получаем необходимые элементы
+		const accordion = document.getElementById('accordion'),
+			onoffswitchLabel = document.querySelectorAll('.onoffswitch-label'),
+			checkBox = document.querySelectorAll('.onoffswitch-checkbox'),
 			secondSection = document.getElementById('second-section'),
-			accordion11 = document.getElementById('accordion'),
-			formControl = document.querySelectorAll('.form-control');
-
-		secondSection.style.display = 'none';
-		onoffswitchLabel.addEventListener('click', () => {
-			if (checkBoxInput.checked) {
-				checkBoxInput.removeAttribute('checked');
-				secondSection.style.display = 'block';
-			} else {
-				checkBoxInput.setAttribute('checked', true);
-				secondSection.style.display = 'none';
-			}
-		});
+			formControl = document.querySelectorAll('.form-control'),
+			calcResult = document.getElementById('calc-result');
 
 		const countSum = () => {
-			let total = 0,
-				defaultValue;
+			let total = 10000;
 
-			const selectedValue0 = formControl[0].options[formControl[0].selectedIndex].value;
-			const selectedValue1 = formControl[1].options[formControl[1].selectedIndex].value;
-			const selectedValue2 = formControl[2].options[formControl[2].selectedIndex].value;
-			const selectedValue3 = formControl[3].options[formControl[3].selectedIndex].value;
+			const obj = {
+				firstDiameter: formControl[0].options[formControl[0].selectedIndex].textContent,
+				firstAmount: formControl[1].options[formControl[1].selectedIndex].textContent,
+				secondDiameter: formControl[2].options[formControl[2].selectedIndex].textContent,
+				secondAmount: formControl[3].options[formControl[3].selectedIndex].textContent
+			};
 
-			if (checkBoxInput.checked) {
-				defaultValue = 10000;
-
-				if (selectedValue0 === '1.2') {
-					total = defaultValue * +selectedValue0;
-				} else {
-					total = defaultValue;
+			if (checkBox[0].checked) {
+				if (obj.firstDiameter === '2 метра') {
+					total *= 1.2;
 				}
 
-				if (selectedValue1 === '1.3') {
-					total = total * +selectedValue1;
-				} else if (selectedValue1 === '1.5') {
-					total = total * +selectedValue1;
+				if (obj.firstAmount === '2 штуки') {
+					total *= 1.3;
+				} else if (obj.firstAmount === '3 штуки') {
+					total *= 1.5;
 				}
 
+				if (checkBox[1].checked) {
+					total += 1000;
+				}
 			} else {
-				defaultValue = 15000;
+				total = 2 * 15000;
 
-				if (selectedValue2 === '1.2') {
-					total = defaultValue * +selectedValue2;
-				} else {
-					total = defaultValue;
+				if (obj.firstDiameter === '2 метра') {
+					total *= 1.2;
 				}
 
-				if (selectedValue3 === '1.3') {
-					total = total * +selectedValue3;
-				} else if (selectedValue3 === '1.5') {
-					total = total * +selectedValue3;
+				if (obj.firstAmount === '2 штуки') {
+					total *= 1.3;
+				} else if (obj.firstAmount === '3 штуки') {
+					total *= 1.5;
+				}
+
+				if (obj.secondDiameter === '2 метра') {
+					total *= 1.2;
+				}
+
+				if (obj.secondAmount === '2 штуки') {
+					total *= 1.3;
+				} else if (obj.secondAmount === '3 штуки') {
+					total *= 1.5;
+				}
+
+				if (checkBox[1].checked) {
+					total += 2000;
 				}
 			}
-
-			// console.log('selectedBox: ', selectedValue1);
-
-			// if (selectedValue0 === '1.2') {
-			// 	total = defaultValue * +selectedValue0;
-			// } else {
-			// 	total = defaultValue;
-			// }
-
-			// if (selectedValue1 === '1.3') {
-			// 	total = total * +selectedValue1;
-			// } else if (selectedValue1 === '1.5') {
-			// 	total = total * +selectedValue1;
-			// }
-
-			// if (selectedValue2 === '1.2') {
-			// 	total = total * +selectedValue2;
-			// }
-
-			// if (selectedValue3 === '1.3') {
-			// 	total = total * +selectedValue3;
-			// } else if (selectedValue1 === '1.5') {
-			// 	total = total * +selectedValue3;
-			// }
-
-			return total;
+			calcResult.value = total;
 		};
 
-		accordion11.addEventListener('change', () => {
-			console.log(countSum());
-			countSum();
-		});
+		accordion.addEventListener('click', (event) => {
+			const target = event.target;
 
+			onoffswitchLabel.forEach((item, i) => {
+				if (item === target.closest('.onoffswitch-label')) {
+					if (checkBox[i].checked) {
+						checkBox[i].removeAttribute('checked');
+					} else {
+						checkBox[i].setAttribute('checked', true);
+					}
+				}
+
+				if (!checkBox[0].checked) {
+					secondSection.style.display = 'block';
+				} else {
+					secondSection.style.display = 'none';
+				}
+			});
+
+			countSum();
+
+		});
 	};
 
 	calc();
@@ -262,7 +269,7 @@ window.addEventListener('DOMContentLoaded', function () {
 		const sentenceBtn = document.querySelector('.add-sentence-btn'),
 			sentence = document.querySelector('.sentence'),
 			sentenceBlocks = sentence.querySelectorAll('.col-xs-12');
-			
+
 		sentenceBtn.addEventListener('click', () => {
 			sentenceBlocks.forEach((elem) => {
 				if (elem.classList.contains('visible-sm-block')) {
