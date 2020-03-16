@@ -280,8 +280,8 @@ window.addEventListener('DOMContentLoaded', function () {
 		tooglePopUp('.popup-discount', 'button.call-btn');
 		const asd = document.querySelector('button.call-btn');
 		asd.addEventListener('mousedown', () => {
-			let a = createObj();
-			sendForm('.capture-form-calc', a);
+			let obj = createObj();
+			sendForm('.capture-form-calc', obj);
 		});
 	};
 
@@ -306,4 +306,16 @@ window.addEventListener('DOMContentLoaded', function () {
 	};
 
 	openSentence();
+	tooglePopUp('.popup-consultation', '.consultation-btn');
+	const bbbt = document.querySelector('.consultation-btn');
+	const bbbtInput = document.getElementById('sss');
+	bbbt.addEventListener('click', (event) => {
+		event.preventDefault();
+		let obj = {
+			question: bbbtInput.value
+		};
+		console.log('obj: ', obj);
+		sendForm('.capture-form-consultation', obj);
+	});
+	
 });

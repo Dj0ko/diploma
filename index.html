@@ -377,7 +377,7 @@
             <h2>Часто задаваемые вопросы</h2>
             <div class="panel-group wow slideInDown" id="accordion-two" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne-two">
+                    <div class="panel-heading accordion" role="tab" id="headingOne-two">
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion-two" href="#collapseOne-two"
                                 aria-expanded="true" aria-controls="collapseOne-two">
@@ -385,7 +385,7 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseOne-two" class="panel-collapse collapse in" role="tabpanel"
+                    <div id="collapseOne-two" class="panel-collapse collapse in accordion-item" role="tabpanel"
                         aria-labelledby="headingOne">
                         <div class="panel-body">
                             Вероятность того, что вода в подводящем трубопроводе замерзнет, отсутствует, потому что она
@@ -399,7 +399,7 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo-two">
+                    <div class="panel-heading accordion" role="tab" id="headingTwo-two">
                         <h4 class="panel-title">
                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-two"
                                 href="#collapseTwo-two" aria-expanded="false" aria-controls="collapseTwo-two">
@@ -408,7 +408,7 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseTwo-two" class="panel-collapse collapse" role="tabpanel"
+                    <div id="collapseTwo-two" class="panel-collapse collapse accordion-item" role="tabpanel"
                         aria-labelledby="headingTwo-two">
                         <div class="panel-body">
                             Нет, не может. Армированное изделие и марка бетона М-350, позволяют выдерживать значительные
@@ -417,7 +417,7 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree-two">
+                    <div class="panel-heading accordion" role="tab" id="headingThree-two">
                         <h4 class="panel-title">
                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-two"
                                 href="#collapseThree-two" aria-expanded="false" aria-controls="collapseThree-two">
@@ -425,7 +425,7 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseThree-two" class="panel-collapse collapse" role="tabpanel"
+                    <div id="collapseThree-two" class="panel-collapse collapse accordion-item" role="tabpanel"
                         aria-labelledby="headingThree-two">
                         <div class="panel-body">
                             Да. Иногда зимний монтаж предпочтительней. Большегрузная техника по мороженому грунту не
@@ -454,7 +454,7 @@
                     <p class="question">Остались вопросы?</p>
                     <p>Введите свой вопрос и в течении 15 минут я свяжусь с вами!</p>
                     <form class="director-form">
-                        <input type="text" name="user_quest" placeholder="Введите свой вопрос" required>
+                        <input type="text" name="user_quest" placeholder="Введите свой вопрос" id="sss" required>
                         <button class="button director-btn consultation-btn" name="submit" type="submit">Получить
                             консультацию
                         </button>
@@ -566,7 +566,7 @@
         <div class="popup-dialog">
             <div class="popup-content">
                 <!-- <div class="popup-form"> -->
-                <form class="capture-form text-center">
+                <form class="capture-form capture-form-consultation text-center">
                     <span class="circle"><button class="popup-close">&times;</button></span>
                     <label for="name_13">Как к вам обращаться</label>
                     <input type="text" id="name_13" name="user_name" placeholder="Ваше имя" required>
