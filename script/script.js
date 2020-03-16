@@ -17,7 +17,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
 		//Обработчик события для закрытия модального окна при клике на крестик или на подложку
 		popUp.addEventListener('click', (event) => {
-			event.preventDefault();
 			let target = event.target;
 			//закрытие на крестик
 			if (target.classList.contains('popup-close')) {
@@ -43,7 +42,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	tooglePopUp('.popup-check', '.check-btn');
 
 	//функция отправки формы
-	const sendForm = (className) => {
+	const sendForm = (className, obj) => {
 		//создаем сообщения
 		const errorMessage = 'Ошибка...',
 			loadMessage = 'Идёт отправка...',
@@ -82,6 +81,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			formData.forEach((val, key) => {
 				body[key] = val;
 			});
+			Object.assign(body, obj);
 			postData(body)
 				.then((response) => {
 					if (response.status !== 200) {
@@ -117,7 +117,6 @@ window.addEventListener('DOMContentLoaded', function () {
 			});
 		});
 	};
-
 	sendForm('.capture-form');
 	sendForm('.main-form');
 
@@ -173,9 +172,6 @@ window.addEventListener('DOMContentLoaded', function () {
 			inputText = accordion.querySelector('input[type="text"]'),
 			calcResult = document.getElementById('calc-result');
 
-			console.log('inputText: ', inputText);
-
-
 		const countSum = () => {
 			let total = 10000;
 
@@ -230,6 +226,35 @@ window.addEventListener('DOMContentLoaded', function () {
 			calcResult.value = total;
 		};
 
+		const createObj = () => {
+			const type = () => {
+				if (checkBox[0].hasAttribute('checked')) {
+					return 'однокамерный';
+				} else {
+					return 'двухкамерный';
+				}
+			};
+
+			const dno = () => {
+				if (checkBox[1].hasAttribute('checked')) {
+					return 'с днищем';
+				} else {
+					return 'без днища';
+				}
+			};
+			const data = {
+				'Тип септика': type(),
+				'Диаметр первого колодца': formControl[0].options[formControl[0].selectedIndex].textContent,
+				'Количество колец первого колодца': formControl[1].options[formControl[1].selectedIndex].textContent,
+				'Диаметр второго колодца': formControl[2].options[formControl[2].selectedIndex].textContent,
+				'Количество колец второго колодца': formControl[3].options[formControl[3].selectedIndex].textContent,
+				'Наличие днища колодца': dno(),
+				'Расстояние от септика до дома': inputText.value,
+				'Примерная стоимость': calcResult.value
+			};
+			return data;
+		};
+
 		accordion.addEventListener('click', (event) => {
 			const target = event.target;
 
@@ -249,37 +274,17 @@ window.addEventListener('DOMContentLoaded', function () {
 				}
 
 			});
-
 			countSum();
-			const type = () => {
-				if (checkBox[0].hasAttribute('checked')) {
-					return 'однокамерный';
-				} else {
-					return 'двухкамерный';
-				}
-			};
-
-			const dno = () => {
-				if (checkBox[1].hasAttribute('checked')) {
-					return 'с днищем';
-				} else {
-					return 'без днища';
-				}
-			};
-
-			const data = {
-				'Тип септика': type(),
-				'Диаметр первого колодца': formControl[0].options[formControl[0].selectedIndex].textContent,
-				'Количество колец первого колодца': formControl[1].options[formControl[1].selectedIndex].textContent,
-				'Диаметр второго колодца': formControl[2].options[formControl[2].selectedIndex].textContent,
-				'Количество колец второго колодца': formControl[3].options[formControl[3].selectedIndex].textContent,
-				'Наличие днища колодца': dno(),
-				'Расстояние от септика до дома': inputText.value
-			};
-			console.log(data);
 		});
+		
 		tooglePopUp('.popup-discount', 'button.call-btn');
+		const asd = document.querySelector('button.call-btn');
+		asd.addEventListener('mousedown', () => {
+			let a = createObj();
+			sendForm('.capture-form-calc', a);
+		});
 	};
+
 	calc();
 
 	// кнопка "Больше"
