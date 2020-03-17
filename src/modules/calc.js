@@ -1,5 +1,8 @@
 'use strict';
 
+import tooglePopUp from './modules/tooglePopUp';
+import sendForm from './modules/sendForm';
+
 //калькулятор
 const calc = () => {
     //получаем необходимые элементы

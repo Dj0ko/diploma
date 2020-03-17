@@ -1,5 +1,8 @@
 'use strict';
 
+import tooglePopUp from './modules/tooglePopUp';
+import sendForm from './modules/sendForm';
+
 //отправка модального окна с вопросом
 const sendQuestion = () => {
     tooglePopUp('.popup-consultation', '.consultation-btn');
