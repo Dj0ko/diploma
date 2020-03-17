@@ -1,7 +1,7 @@
 'use strict';
 
-import tooglePopUp from './modules/tooglePopUp';
-import sendForm from './modules/sendForm';
+import tooglePopUp from './tooglePopUp';
+import sendForm from './sendForm';
 
 //калькулятор
 const calc = () => {
@@ -39,7 +39,7 @@ const calc = () => {
                 total += 1000;
             }
         } else {
-            total = 2 * 15000;
+            total = 15000;
 
             if (obj.firstDiameter === '2 метра') {
                 total *= 1.2;

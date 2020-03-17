@@ -1,20 +1,23 @@
 'use strict';
 
-import tooglePopUp from './modules/tooglePopUp';
-import sendForm from './modules/sendForm';
+import tooglePopUp from './tooglePopUp';
+import sendForm from './sendForm';
 
 //отправка модального окна с вопросом
 const sendQuestion = () => {
     tooglePopUp('.popup-consultation', '.consultation-btn');
-    const bbbt = document.querySelector('.consultation-btn');
-    const bbbtInput = document.getElementById('sss');
-    bbbt.addEventListener('click', (event) => {
+    const btn = document.querySelector('.consultation-btn');
+    const btnInput = document.getElementById('sss');
+    btn.addEventListener('click', (event) => {
         event.preventDefault();
         let obj = {
-            question: bbbtInput.value
+            question: btnInput.value
         };
-        console.log('obj: ', obj);
         sendForm('.capture-form-consultation', obj);
+    });
+
+    btnInput.addEventListener('input', () => {
+        btnInput.value = btnInput.value.replace(/[a-zA-Z\d]/g, '');
     });
 };
 

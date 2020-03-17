@@ -4,11 +4,14 @@
   "description": "",
   "dependencies": {},
   "devDependencies": {
+    "path": "^0.12.7",
     "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "watch": "webpack --watch"
+    "dev": "webpack-dev-server --open --mode=development",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",

@@ -54,11 +54,12 @@ const sendForm = (className, obj) => {
             .catch((error) => {
                 statusMessage.textContent = errorMessage;
                 console.log(error);
+                form.reset();
             })
             .finally(() => {
                 setTimeout(() => {
                     statusMessage.remove();
-                }, 5000);
+                }, 3000);
             });
     });
 
@@ -72,7 +73,7 @@ const sendForm = (className, obj) => {
             if (elem.type === 'text' && elem.classList.contains('phone-user')) {
                 elem.value = elem.value.replace(/[^\d]/g, '');
             } else {
-                //если инпут с type='tel', то разрешаем ввод только цифр и знака "+"
+                //если инпут с type='tel', то разрешаем ввод только цифр
                 elem.value = elem.value.replace(/[^а-яА-Я ]/g, '');
             }
         });
