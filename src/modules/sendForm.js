@@ -71,7 +71,7 @@ const sendForm = (className, obj) => {
         elem.addEventListener('input', () => {
             //если инпут с type='text', то запрещаем ввод любых символов кроме Кириллицы и пробелов
             if (elem.type === 'text' && elem.classList.contains('phone-user')) {
-                elem.value = elem.value.replace(/[^\d]/g, '');
+                elem.value = elem.value.replace(/[^\+\d]/g, '');
             } else {
                 //если инпут с type='tel', то разрешаем ввод только цифр
                 elem.value = elem.value.replace(/[^а-яА-Я ]/g, '');
