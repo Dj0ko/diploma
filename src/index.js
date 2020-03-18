@@ -13,6 +13,7 @@ sendForm('.capture-form-call');
 
 //Вызываем функцию открытия/закрытия модального окна при нажатии на "Заказать со скидкой" и "Узнать цену со скидкой"
 tooglePopUp('.popup-discount', '.discount-btn');
+sendForm('.capture-form-calc');
 
 //Вызываем функцию открытия/закрытия модального окна при нажатии на "Получить чек-лист и скидку"
 tooglePopUp('.popup-check', '.check-btn');
